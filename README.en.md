@@ -1,22 +1,26 @@
 # prime
 
 #### Description
-一个使用C++查找素数的程序，有单线程和多线程版本
-
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+A Prime Finding Program written with C++. Both single and multi thread versions are provided.
 
 #### Instructions
+It's better to add `-O2` param for better performance.
+##### Windows
+Add `main.cpp` or `main_mt.cpp` to an empty Visual Studio and build&run.
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+or use MinGW:
+```
+g++ main.cpp
+```
+### Linux/WSL
+Single thread version:
+```
+g++ main.cpp
+```
+Multi thread version:
+```
+g++ main_mt.cpp -lpthread
+```
 
 #### Contribution
 
@@ -25,12 +29,3 @@ Software architecture description
 3.  Commit your code
 4.  Create Pull Request
 
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
