@@ -28,5 +28,6 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "thread": "cpp"
-    }
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
