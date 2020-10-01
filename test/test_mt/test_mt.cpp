@@ -31,7 +31,7 @@ TEST(MT, correction)
         89,
         97
     };
-    std::list<uint64_t> gen = generatePrime(100);
+    std::list<uint64_t> gen = prime::generatePrime(100);
     EXPECT_EQ(l, gen);
     EXPECT_TRUE(true);
 }

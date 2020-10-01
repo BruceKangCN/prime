@@ -7,7 +7,7 @@
 
 int main()
 {
-    std::list<uint64_t> list = std::move(generatePrime(MAX));
+    std::list<uint64_t> list = std::move(prime::generatePrime(MAX));
 
     if (OUTPUT) {
         for (auto&& i : list) {

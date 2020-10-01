@@ -7,6 +7,8 @@
 #include <mutex>
 #include <thread>
 
+namespace prime {
 std::list<uint64_t> generatePrime(uint64_t max);
+}
 
 #endif // MAIN_MT_H

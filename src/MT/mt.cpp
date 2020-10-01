@@ -1,5 +1,6 @@
 #include "main_mt.h"
 
+namespace prime {
 unsigned running_count = 0;
 std::mutex value_mutex;
 std::mutex list_mutex;
@@ -70,4 +71,5 @@ std::list<uint64_t> generatePrime(uint64_t max)
         std::this_thread::sleep_for(std::chrono::microseconds(100));
     }
     return list;
+}
 }

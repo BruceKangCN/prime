@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(prime)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 set(CMAKE_CXX_FLAGS "-O2 -std=c++11")
 
