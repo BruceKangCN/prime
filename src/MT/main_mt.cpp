@@ -1,12 +1,8 @@
-#include <chrono>
-#include <cstdint>
 #include <cstdio>
-#include <list>
-#include <mutex>
-#include <thread>
+
+#include "main_mt.h"
 
 #define MAX (1 << 30)
-#define END (MAX & 0xfffffffffffffffe - 1)
 #define OUTPUT (false)
 
 unsigned running_count = 0;
@@ -25,8 +21,9 @@ std::list<uint64_t>::iterator search_r(std::list<uint64_t>& list, uint64_t v)
     return ++place;
 }
 
-void isPrime(uint64_t& value, std::list<uint64_t>& list)
+void isPrime(uint64_t& value, std::list<uint64_t>& list, uint64_t max)
 {
+    uint64_t end = (max & 0xfffffffffffffffe - 1);
     auto start = std::chrono::system_clock::now().time_since_epoch();
 
     uint64_t v;
@@ -36,7 +33,7 @@ void isPrime(uint64_t& value, std::list<uint64_t>& list)
             v = value;
             value += 2;
         }
-        if (v > END) {
+        if (v > end) {
             break;
         }
         bool flag = true;
@@ -55,27 +52,34 @@ void isPrime(uint64_t& value, std::list<uint64_t>& list)
         }
     }
 
-    auto end = std::chrono::system_clock::now().time_since_epoch();
-    std::printf("thread finish in %ld ms.\n", std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
+    auto finish = std::chrono::system_clock::now().time_since_epoch();
+    std::printf("thread finish in %ld ms.\n", std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count());
     {
         std::lock_guard<std::mutex> guard(m);
         running_count--;
     }
 }
 
-int main()
+std::list<uint64_t> generatePrime(uint64_t max)
 {
     std::list<uint64_t> list = { 2 };
     uint64_t value = 3;
 
     for (unsigned i = 0; i < std::thread::hardware_concurrency(); i++) {
-        std::thread(isPrime, std::ref(value), std::ref(list)).detach();
+        std::thread(isPrime, std::ref(value), std::ref(list), max).detach();
         running_count++;
     }
 
     while (running_count > 0) {
         std::this_thread::sleep_for(std::chrono::microseconds(100));
     }
+    return list;
+}
+
+int main()
+{
+    std::list<uint64_t> list = std::move(generatePrime(MAX));
+
     if (OUTPUT) {
         for (auto&& i : list) {
             std::printf("%ld\n", i);

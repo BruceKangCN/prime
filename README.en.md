@@ -4,23 +4,12 @@
 A Prime Finding Program written with C++. Both single and multi thread versions are provided.
 
 #### Instructions
-It's better to add `-O2` param for better performance.
-##### Windows
-Add `main.cpp` or `main_mt.cpp` to an empty Visual Studio and build&run.
-
-or use MinGW:
 ```
-g++ main.cpp
+mkdir build && cd build
+cmake ..
+make
 ```
-### Linux/WSL
-Single thread version:
-```
-g++ main.cpp
-```
-Multi thread version:
-```
-g++ main_mt.cpp -lpthread
-```
+the executable files are in the `build/bin` directory.
 
 #### Contribution
 
