@@ -1,8 +1,8 @@
-#include <cassert>
+#include <gtest/gtest.h>
 
 #include "main_mt.h"
 
-int main()
+TEST(MT, correction)
 {
     std::list<uint64_t> l = {
         2,
@@ -32,7 +32,12 @@ int main()
         97
     };
     std::list<uint64_t> gen = generatePrime(100);
-    assert(l == gen);
+    EXPECT_EQ(l, gen);
+    EXPECT_TRUE(true);
+}
 
-    return 0;
+int main(int argc, char* argv[])
+{
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

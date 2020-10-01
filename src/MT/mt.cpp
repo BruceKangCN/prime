@@ -1,9 +1,4 @@
-#include <cstdio>
-
 #include "main_mt.h"
-
-#define MAX (1 << 30)
-#define OUTPUT (false)
 
 unsigned running_count = 0;
 std::mutex value_mutex;
@@ -68,24 +63,11 @@ std::list<uint64_t> generatePrime(uint64_t max)
     for (unsigned i = 0; i < std::thread::hardware_concurrency(); i++) {
         std::thread(isPrime, std::ref(value), std::ref(list), max).detach();
         running_count++;
+        std::this_thread::sleep_for(std::chrono::microseconds(1));
     }
 
     while (running_count > 0) {
         std::this_thread::sleep_for(std::chrono::microseconds(100));
     }
     return list;
-}
-
-int main()
-{
-    std::list<uint64_t> list = std::move(generatePrime(MAX));
-
-    if (OUTPUT) {
-        for (auto&& i : list) {
-            std::printf("%ld\n", i);
-        }
-    }
-    std::printf("length: %ld\n", list.size());
-
-    return 0;
 }
